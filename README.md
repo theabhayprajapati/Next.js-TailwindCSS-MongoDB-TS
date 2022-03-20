@@ -2,7 +2,7 @@
 
 This example shows how to use [Tailwind CSS](https://tailwindcss.com/) [(v3.0)](https://tailwindcss.com/blog/tailwindcss-v3), [MongoDB](https://www.mongodb.com/developer/how-to/nextjs-with-mongodb/) with Next.js. It follows the steps outlined in the official [Tailwind docs](https://tailwindcss.com/docs/guides/nextjs) & [MongoDB docs](https://docs.mongodb.com/manual/tutorial/nextjs/).
 
-#### Simple Hack:
+## Simple Hack:
  Go to **[`.env.local.example`](/.env.local.example):-** file add your MongoDB **connection String** to **MONGODB_URI** and rename it to **.env.local.**
 Then, run 
 ```bash
