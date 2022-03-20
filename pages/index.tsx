@@ -1,8 +1,20 @@
-import type { NextPage } from 'next'
+import type { GetServerSideProps, NextPage } from 'next'
 import Head from 'next/head'
 import Image from 'next/image'
+import { useRouter } from 'next/router'
+import clientPromise from '../lib/mongodb'
 
-const Home: NextPage = () => {
+
+interface GSSRProps {
+  isConnected: boolean
+}
+
+const Home: NextPage<{ isConnected: boolean }> = ({ isConnected }) => {
+  const router = useRouter()
+  const code = "npx create-next-app -e "
+  function copyText(entryText: string) {
+    navigator.clipboard.writeText(entryText);
+  }
   return (
     <div className="flex min-h-screen flex-col items-center justify-center py-2">
       <Head>
@@ -14,7 +26,9 @@ const Home: NextPage = () => {
         <h1 className="text-6xl font-bold">
           Welcome to{' '}
           <a className="text-blue-600" href="https://nextjs.org">
-            Next.js!
+            Next.js! {
+              isConnected ? 'with MongoDB' : 'Not Connected'
+            }
           </a>
         </h1>
 
@@ -24,6 +38,9 @@ const Home: NextPage = () => {
             pages/index.tsx
           </code>
         </p>
+        <h1 className='text-2xl mt-3 items-center flex gap-3 font-semibold '>
+          Build for you with {''}  <Image src={'https://avatars.githubusercontent.com/u/88815641?v=4'} alt="Abhay Github Avatar" width={40} height={40} className='rounded-full cursor-pointer hover:scale-95 transform transition-all duration-200 focus:scale-90' onClick={() => router.push('https://github.com/theabhayprajapati')} />
+        </h1>
 
         <div className="mt-6 flex max-w-4xl flex-wrap items-center justify-around sm:w-full">
           <a
@@ -65,6 +82,11 @@ const Home: NextPage = () => {
               Instantly deploy your Next.js site to a public URL with Vercel.
             </p>
           </a>
+          <code onClick={() => copyText(code)} className="mt-6 w-96 rounded-xl border p-6 text-left bg-gray-100 hover:text-blue-600 focus:text-blue-600 cursor-pointer">
+            <span className='text-green-500'>
+              $</span> {code}
+          </code>
+
         </div>
       </main>
 
@@ -79,8 +101,30 @@ const Home: NextPage = () => {
           <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
         </a>
       </footer>
+
     </div>
   )
 }
 
 export default Home
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+
+
+  try {
+    //? client.db() will be the default database passed in the MONGODB_URI
+    //? You can change the database by calling the client.db() function and specifying a database like:
+    //? const db = client.db("myDatabase");
+    //? Then you can execute queries against your database like so:
+    //? db.find({}) or any of the MongoDB Node Driver commands
+    await clientPromise
+    return {
+      props: { isConnected: true },
+    }
+  } catch (e) {
+    console.error(e)
+    return {
+      props: { isConnected: false },
+    }
+  }
+}
