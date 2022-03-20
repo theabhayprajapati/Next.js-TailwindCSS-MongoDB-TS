@@ -11,7 +11,7 @@ interface GSSRProps {
 
 const Home: NextPage<{ isConnected: boolean }> = ({ isConnected }) => {
   const router = useRouter()
-  const code = "npx create-next-app -e "
+  const code = "npx create-next-app -e https://github.com/theabhayprajapati/Next.js-TailwindCSS-MongoDB-TS <appname> "
   function copyText(entryText: string) {
     navigator.clipboard.writeText(entryText);
   }
@@ -78,11 +78,15 @@ const Home: NextPage<{ isConnected: boolean }> = ({ isConnected }) => {
             className="mt-6 w-96 rounded-xl border p-6 text-left hover:text-blue-600 focus:text-blue-600"
           >
             <h3 className="text-2xl font-bold">Deploy &rarr;</h3>
-            <p className="mt-4 text-xl">
+            <p className="mt-4 tex
+            
+            
+            
+            t-xl">
               Instantly deploy your Next.js site to a public URL with Vercel.
             </p>
           </a>
-          <code onClick={() => copyText(code)} className="mt-6 w-96 rounded-xl border p-6 text-left bg-gray-100 hover:text-blue-600 focus:text-blue-600 cursor-pointer">
+          <code onClick={() => copyText(code)} className="mt-6 w-full rounded-xl border p-6 text-left bg-gray-100 hover:text-blue-600 focus:text-blue-600 cursor-pointer">
             <span className='text-green-500'>
               $</span> {code}
           </code>
