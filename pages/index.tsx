@@ -86,7 +86,7 @@ const Home: NextPage<{ isConnected: boolean }> = ({ isConnected }) => {
               Instantly deploy your Next.js site to a public URL with Vercel.
             </p>
           </a>
-          <code onClick={() => copyText(code)} className="mt-6 w-full rounded-xl border p-6 text-left bg-gray-100 hover:text-blue-600 focus:text-blue-600 cursor-pointer">
+          <code onClick={() => copyText(code)} className="mt-6 w-full rounded-xl border p-6 text-left hover:text-blue-600 focus:text-blue-600 cursor-pointer">
             <span className='text-green-500'>
               $</span> {code}
           </code>
